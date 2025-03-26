@@ -14,6 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/bookings")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private UserService userService;
