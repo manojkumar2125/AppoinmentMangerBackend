@@ -1,29 +1,37 @@
 package com.appoinmentManger.service.impl;
 
-import com.appoinmentManger.entity.UserDTO;
+import com.appoinmentManger.entity.Agent;
 import com.appoinmentManger.repository.UserRepository;
+import com.appoinmentManger.response.AgentDTO;
 import com.appoinmentManger.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ServiceImpl implements UserService {
 
-
     private UserRepository userRepository;
     @Autowired
-    ServiceImpl(UserRepository userRepository) {
+    public ServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     /**
-     * @param userDTO
+     * @param AgentDTO
      * @return
      */
     @Override
-    public UserDTO createUser(UserDTO userDTO) {
-
-        return null;
+    public Agent createUser(AgentDTO agentDTO) {
+        Agent agent = new Agent();
+        agent.setName(agentDTO.name());
+        agent.setTime(agentDTO.time());
+        agent.setDate(agentDTO.date());
+        agent.setActive(agentDTO.isActive());
+        return userRepository.save(agent);
     }
 
     /**
@@ -31,7 +39,7 @@ public class ServiceImpl implements UserService {
      * @return
      */
     @Override
-    public UserDTO updateUser(UserDTO userDTO) {
+    public Agent updateUser(Agent userDTO) {
         return null;
     }
 
@@ -40,18 +48,19 @@ public class ServiceImpl implements UserService {
      * @return
      */
     @Override
-    public UserDTO getUserById(Long id) {
-
-        return userRepository.findById(id).orElse(null);
+    public Agent getUserById(Long id) {
+        Optional<Agent> agent = userRepository.findById(id);
+        return agent.orElse(null);
     }
 
     /**
-     * @param email
+     * @param date
      * @return
      */
     @Override
-    public UserDTO getUserByEmail(String email) {
-        return null;
+    public List<Agent> getUserByDate(String date) {
+        List<Agent> agents =  userRepository.findByDate(date);
+        return agents;
     }
 
     /**
@@ -59,8 +68,9 @@ public class ServiceImpl implements UserService {
      * @return
      */
     @Override
-    public UserDTO getUserByUsername(String username) {
-        return null;
+    public List<Agent> getUserByUsername(String username) {
+        List<Agent> agents = userRepository.findByName(username);
+        return agents;
     }
 
     /**
@@ -69,7 +79,7 @@ public class ServiceImpl implements UserService {
      * @return
      */
     @Override
-    public UserDTO getUserByEmailAndPassword(String email, String password) {
+    public Agent getUserByEmailAndPassword(String email, String password) {
         return null;
     }
 
@@ -77,7 +87,8 @@ public class ServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<UserDTO> getAllUser() {
-        return userRepository.findAll();
+    public List<Agent> getAllUser() {
+        List<Agent> agents = userRepository.findAll();
+        return agents;
     }
 }
