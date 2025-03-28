@@ -7,7 +7,6 @@ import com.appoinmentManger.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,9 +26,9 @@ public class ServiceImpl implements UserService {
     @Override
     public Agent createUser(AgentDTO agentDTO) {
         Agent agent = new Agent();
-        agent.setName(agentDTO.name());
-        agent.setTime(agentDTO.time());
-        agent.setDate(agentDTO.date());
+        agent.setName(agentDTO.getName());
+        agent.setTime(agentDTO.getTime());
+        agent.setDate(agentDTO.getDate());
         agent.setActive(agentDTO.isActive());
         return userRepository.save(agent);
     }
@@ -59,8 +58,8 @@ public class ServiceImpl implements UserService {
      */
     @Override
     public List<Agent> getUserByDate(String date) {
-        List<Agent> agents =  userRepository.findByDate(date);
-        return agents;
+        return  userRepository.findByDate(date);
+
     }
 
     /**
@@ -69,8 +68,8 @@ public class ServiceImpl implements UserService {
      */
     @Override
     public List<Agent> getUserByUsername(String username) {
-        List<Agent> agents = userRepository.findByName(username);
-        return agents;
+        return userRepository.findByName(username);
+
     }
 
     /**
@@ -88,7 +87,6 @@ public class ServiceImpl implements UserService {
      */
     @Override
     public List<Agent> getAllUser() {
-        List<Agent> agents = userRepository.findAll();
-        return agents;
+        return userRepository.findAll();
     }
 }

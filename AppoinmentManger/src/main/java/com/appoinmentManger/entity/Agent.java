@@ -1,10 +1,6 @@
 package com.appoinmentManger.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-
-import java.sql.Date;
-import java.sql.Time;
 
 @Entity
 @Table(name ="agents", uniqueConstraints = @UniqueConstraint(columnNames = {"name","date","time"}))
@@ -35,7 +31,7 @@ public class Agent {
     }
 
     public void setDate(String date) {
-        date = date;
+        this.date = date;
     }
 
     public Long getId() {
@@ -59,6 +55,10 @@ public class Agent {
     }
 
     public void setTime(String time) {
-        time = time;
+        this.time = time;
     }
+
+
+
+
 }

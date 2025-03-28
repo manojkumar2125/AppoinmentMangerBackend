@@ -1,7 +1,17 @@
 package com.appoinmentManger.response;
 
-import java.sql.Date;
-import java.sql.Time;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record AgentDTO(String name, String date, String time, boolean isActive) {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class AgentDTO {
+    private String name;
+    private String date;
+   private  String time;
+   private  boolean isActive;
 }
